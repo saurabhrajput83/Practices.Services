@@ -1,0 +1,8 @@
+# Practices.Services
+
+/Practices.API/bin
+/Practices.API/obj
+/Practices.CosmosDB.API/bin
+/Practices.CosmosDB.API/obj
+/Practices.Web/bin
+/Practices.Web/obj

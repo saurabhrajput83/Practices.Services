@@ -18,6 +18,8 @@ namespace Practices.CosmosDB.API
 {
     public class Startup
     {
+        private readonly string default_Cors_Policy = "DefaultCorsPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,10 +32,20 @@ namespace Practices.CosmosDB.API
         {
 
             services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
 
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(default_Cors_Policy, policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +64,7 @@ namespace Practices.CosmosDB.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(default_Cors_Policy);
             app.UseRouting();
 
             app.UseAuthorization();

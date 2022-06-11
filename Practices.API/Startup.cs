@@ -70,7 +70,7 @@ namespace Practices.API
             }
 
             app.UseCors(default_Cors_Policy);
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

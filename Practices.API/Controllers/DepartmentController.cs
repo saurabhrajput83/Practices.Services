@@ -72,9 +72,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Insert")]
+        [Route("InsertDepartment")]
         [HttpPost]
-        public IActionResult Insert(Department entity)
+        public IActionResult InsertDepartment(Department entity)
         {
             try
             {
@@ -88,9 +88,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Update")]
+        [Route("UpdateDepartment")]
         [HttpPut]
-        public IActionResult Update(Department entity)
+        public IActionResult UpdateDepartment(Department entity)
         {
             try
             {
@@ -104,9 +104,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Delete")]
+        [Route("DeleteDepartment")]
         [HttpDelete]
-        public IActionResult Delete(Department entity)
+        public IActionResult DeleteDepartment(Department entity)
         {
             try
             {

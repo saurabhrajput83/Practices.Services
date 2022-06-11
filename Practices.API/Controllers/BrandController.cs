@@ -73,9 +73,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Insert")]
+        [Route("InsertBrand")]
         [HttpPost]
-        public IActionResult Insert(Brand entity)
+        public IActionResult InsertBrand(Brand entity)
         {
             try
             {
@@ -89,9 +89,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Update")]
+        [Route("UpdateBrand")]
         [HttpPut]
-        public IActionResult Update(Brand entity)
+        public IActionResult UpdateBrand(Brand entity)
         {
             try
             {
@@ -105,9 +105,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Delete")]
+        [Route("DeleteBrand")]
         [HttpDelete]
-        public IActionResult Delete(Brand entity)
+        public IActionResult DeleteBrand(Brand entity)
         {
             try
             {

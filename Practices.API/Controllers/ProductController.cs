@@ -72,9 +72,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Insert")]
+        [Route("InsertProduct")]
         [HttpPost]
-        public IActionResult Insert(Product entity)
+        public IActionResult InsertProduct(Product entity)
         {
             try
             {
@@ -88,9 +88,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Update")]
+        [Route("UpdateProduct")]
         [HttpPut]
-        public IActionResult Update(Product entity)
+        public IActionResult UpdateProduct(Product entity)
         {
             try
             {
@@ -104,9 +104,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("Delete")]
+        [Route("DeleteProduct")]
         [HttpDelete]
-        public IActionResult Delete(Product entity)
+        public IActionResult DeleteProduct(Product entity)
         {
             try
             {

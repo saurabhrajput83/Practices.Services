@@ -7,11 +7,11 @@ namespace Practices.CosmosDB.API.Infrastructure
 {
     public interface IDepartmentRepository
     {
-        IEnumerable<object> GetAll();
-        IEnumerable<object> GetAllActiveDepartments();
-        object GetById(int id);
-        void Insert(object entity);
-        void Update(object entity);
-        void Delete(object entity);
+        Task<IEnumerable<dynamic>> GetAllAsync();
+        Task<IEnumerable<dynamic>> GetAllActiveDepartmentsAsync();
+        Task<dynamic> GetByIdAsync(string id);
+        Task<dynamic> InsertAsync(dynamic entity);
+        Task<dynamic> UpdateAsync(string id, dynamic entity);
+        Task<dynamic> DeleteAsync(string id);
     }
 }

@@ -9,11 +9,11 @@ namespace Practices.CosmosDB.API.Infrastructure
 {
     public interface IBrandRepository
     {
-        Task<IEnumerable<dynamic>> GetAll();
-        Task<IEnumerable<dynamic>> GetAllActiveBrands();
-        Task<dynamic> GetById(string id);
-        Task<dynamic> Insert(dynamic entity);
-        Task<dynamic> Update(string id, dynamic entity);
-        Task<dynamic> Delete(string id);
+        Task<IEnumerable<dynamic>> GetAllAsync();
+        Task<IEnumerable<dynamic>> GetAllActiveBrandsAsync();
+        Task<dynamic> GetByIdAsync(string id);
+        Task<dynamic> InsertAsync(dynamic entity);
+        Task<dynamic> UpdateAsync(string id, dynamic entity);
+        Task<dynamic> DeleteAsync(string id);
     }
 }

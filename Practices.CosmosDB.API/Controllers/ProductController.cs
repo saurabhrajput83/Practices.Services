@@ -13,28 +13,28 @@ namespace Practices.CosmosDB.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly ILogger<BrandController> _logger;
-        private readonly IBrandRepository _brandRepository;
+        private readonly ILogger<ProductController> _logger;
+        private readonly IProductRepository _productRepository;
 
-        public BrandController(IConfiguration config,
-            ILogger<BrandController> logger, IBrandRepository brandRepository)
+        public ProductController(IConfiguration config,
+            ILogger<ProductController> logger, IProductRepository productRepository)
         {
             _logger = logger;
             _config = config;
-            _brandRepository = brandRepository;
+            _productRepository = productRepository;
 
         }
 
-        [Route("GetAllBrands")]
+        [Route("GetAllProducts")]
         [HttpGet]
-        public async Task<IActionResult> GetAllBrands()
+        public async Task<IActionResult> GetAllProducts()
         {
             try
             {
-                IEnumerable<dynamic> items = await _brandRepository.GetAllAsync();
+                IEnumerable<dynamic> items = await _productRepository.GetAllAsync();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -44,13 +44,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("GetAllActiveBrands")]
+        [Route("GetAllActiveProducts")]
         [HttpGet]
-        public async Task<IActionResult> GetAllActiveBrands()
+        public async Task<IActionResult> GetAllActiveProducts()
         {
             try
             {
-                IEnumerable<dynamic> items = await _brandRepository.GetAllActiveBrandsAsync();
+                IEnumerable<dynamic> items = await _productRepository.GetAllActiveProductsAsync();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -60,13 +60,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("GetBrandById/{id?}")]
+        [Route("GetProductById/{id?}")]
         [HttpGet]
-        public async Task<IActionResult> GetBrandById(string id)
+        public async Task<IActionResult> GetProductById(string id)
         {
             try
             {
-                dynamic item = await _brandRepository.GetByIdAsync(id);
+                dynamic item = await _productRepository.GetByIdAsync(id);
                 return Ok(item);
             }
             catch (Exception ex)
@@ -76,13 +76,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("InsertBrand")]
+        [Route("InsertProduct")]
         [HttpPost]
-        public async Task<IActionResult> InsertBrand(dynamic entity)
+        public async Task<IActionResult> InsertProduct(dynamic entity)
         {
             try
             {
-                dynamic response = await _brandRepository.InsertAsync(entity);
+                dynamic response = await _productRepository.InsertAsync(entity);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("UpdateBrand/{id?}")]
+        [Route("UpdateProduct/{id?}")]
         [HttpPut]
-        public async Task<IActionResult> UpdateBrand(string id, dynamic entity)
+        public async Task<IActionResult> UpdateProduct(string id, dynamic entity)
         {
             try
             {
-                dynamic response = await _brandRepository.UpdateAsync(id, entity);
+                dynamic response = await _productRepository.UpdateAsync(id, entity);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -108,13 +108,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("DeleteBrand/{id}")]
+        [Route("DeleteProduct/{id}")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteBrand(string id)
+        public async Task<IActionResult> DeleteProduct(string id)
         {
             try
             {
-                dynamic response = await _brandRepository.DeleteAsync(id); ;
+                dynamic response = await _productRepository.DeleteAsync(id); ;
                 return Ok(response);
             }
             catch (Exception ex)

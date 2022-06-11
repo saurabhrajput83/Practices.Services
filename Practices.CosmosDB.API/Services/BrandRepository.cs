@@ -11,13 +11,10 @@ using System.Threading.Tasks;
 
 namespace Practices.CosmosDB.API.Services
 {
-
-
     public class BrandRepository : BaseRespository<BrandRepository>, IBrandRepository
     {
         private readonly IConfiguration _config;
         private readonly ILogger<BrandRepository> _logger;
-        private readonly string _containerId = "Brands";
       
         public BrandRepository(
             IConfiguration config,
@@ -27,22 +24,14 @@ namespace Practices.CosmosDB.API.Services
             _logger = logger;
         }
 
-        public Container BrandsContainer
-        {
-            get
-            {
-                return Client.GetContainer(DatabaseId, _containerId);
-            }
-        }
-
-        public async Task<dynamic> Delete(string id)
+        public async Task<dynamic> DeleteAsync(string id)
         {
             ItemResponse<dynamic> response = await BrandsContainer.DeleteItemAsync<dynamic>(id,
                 new PartitionKey(id));
             return response.Resource;
         }
 
-        public async Task<IEnumerable<dynamic>> GetAll()
+        public async Task<IEnumerable<dynamic>> GetAllAsync()
         {
             string queryText = "select * from c";
             var itemsIterator = BrandsContainer.GetItemQueryIterator<dynamic>(queryText);
@@ -57,7 +46,7 @@ namespace Practices.CosmosDB.API.Services
             return itemsList;
         }
 
-        public async Task<IEnumerable<dynamic>> GetAllActiveBrands()
+        public async Task<IEnumerable<dynamic>> GetAllActiveBrandsAsync()
         {
             string queryText = "SELECT * FROM c where c.isActive = true";
             var itemsIterator = BrandsContainer.GetItemQueryIterator<dynamic>(queryText);
@@ -73,7 +62,7 @@ namespace Practices.CosmosDB.API.Services
 
         }
 
-        public async Task<dynamic> GetById(string id)
+        public async Task<dynamic> GetByIdAsync(string id)
         {
             string queryText = "SELECT * FROM c where c.id = '" + id + "'";
             var itemsIterator = BrandsContainer.GetItemQueryIterator<dynamic>(queryText);
@@ -82,7 +71,7 @@ namespace Practices.CosmosDB.API.Services
             return documents.FirstOrDefault();
         }
 
-        public async Task<dynamic> Insert(dynamic entity)
+        public async Task<dynamic> InsertAsync(dynamic entity)
         {
             Guid id = Guid.NewGuid();
             entity.id = id;
@@ -93,7 +82,7 @@ namespace Practices.CosmosDB.API.Services
             return response.Resource;
         }
 
-        public async Task<dynamic> Update(string id,dynamic entity)
+        public async Task<dynamic> UpdateAsync(string id, dynamic entity)
         {
             ItemResponse<dynamic> response = await BrandsContainer.UpsertItemAsync<dynamic>(entity,
                   new PartitionKey(id));

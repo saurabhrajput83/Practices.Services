@@ -13,28 +13,28 @@ namespace Practices.CosmosDB.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly ILogger<BrandController> _logger;
-        private readonly IBrandRepository _brandRepository;
+        private readonly ILogger<DepartmentController> _logger;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public BrandController(IConfiguration config,
-            ILogger<BrandController> logger, IBrandRepository brandRepository)
+        public DepartmentController(IConfiguration config,
+            ILogger<DepartmentController> logger, IDepartmentRepository departmentRepository)
         {
             _logger = logger;
             _config = config;
-            _brandRepository = brandRepository;
+            _departmentRepository = departmentRepository;
 
         }
 
-        [Route("GetAllBrands")]
+        [Route("GetAllDepartments")]
         [HttpGet]
-        public async Task<IActionResult> GetAllBrands()
+        public async Task<IActionResult> GetAllDepartments()
         {
             try
             {
-                IEnumerable<dynamic> items = await _brandRepository.GetAllAsync();
+                IEnumerable<dynamic> items = await _departmentRepository.GetAllAsync();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -44,13 +44,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("GetAllActiveBrands")]
+        [Route("GetAllActiveDepartments")]
         [HttpGet]
-        public async Task<IActionResult> GetAllActiveBrands()
+        public async Task<IActionResult> GetAllActiveDepartments()
         {
             try
             {
-                IEnumerable<dynamic> items = await _brandRepository.GetAllActiveBrandsAsync();
+                IEnumerable<dynamic> items = await _departmentRepository.GetAllActiveDepartmentsAsync();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -60,13 +60,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("GetBrandById/{id?}")]
+        [Route("GetDepartmentById/{id?}")]
         [HttpGet]
-        public async Task<IActionResult> GetBrandById(string id)
+        public async Task<IActionResult> GetDepartmentById(string id)
         {
             try
             {
-                dynamic item = await _brandRepository.GetByIdAsync(id);
+                dynamic item = await _departmentRepository.GetByIdAsync(id);
                 return Ok(item);
             }
             catch (Exception ex)
@@ -76,13 +76,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("InsertBrand")]
+        [Route("InsertDepartment")]
         [HttpPost]
-        public async Task<IActionResult> InsertBrand(dynamic entity)
+        public async Task<IActionResult> InsertDepartment(dynamic entity)
         {
             try
             {
-                dynamic response = await _brandRepository.InsertAsync(entity);
+                dynamic response = await _departmentRepository.InsertAsync(entity);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("UpdateBrand/{id?}")]
+        [Route("UpdateDepartment/{id?}")]
         [HttpPut]
-        public async Task<IActionResult> UpdateBrand(string id, dynamic entity)
+        public async Task<IActionResult> UpdateDepartment(string id, dynamic entity)
         {
             try
             {
-                dynamic response = await _brandRepository.UpdateAsync(id, entity);
+                dynamic response = await _departmentRepository.UpdateAsync(id, entity);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -108,13 +108,13 @@ namespace Practices.CosmosDB.API.Controllers
             }
         }
 
-        [Route("DeleteBrand/{id}")]
+        [Route("DeleteDepartment/{id}")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteBrand(string id)
+        public async Task<IActionResult> DeleteDepartment(string id)
         {
             try
             {
-                dynamic response = await _brandRepository.DeleteAsync(id); ;
+                dynamic response = await _departmentRepository.DeleteAsync(id); ;
                 return Ok(response);
             }
             catch (Exception ex)

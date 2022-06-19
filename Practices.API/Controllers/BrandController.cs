@@ -107,12 +107,16 @@ namespace Practices.API.Controllers
 
         [Route("DeleteBrand")]
         [HttpDelete]
-        public IActionResult DeleteBrand(Brand entity)
+        public IActionResult DeleteBrand(int id)
         {
             try
             {
-                Repository.Delete(entity);
-                _unitOfWork.SaveChanges();
+                Brand entity = Repository.GetById(id);
+                if (entity != null)
+                {
+                    Repository.Delete(entity);
+                    _unitOfWork.SaveChanges();
+                }
                 return Ok(entity);
             }
             catch (Exception ex)

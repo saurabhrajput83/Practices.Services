@@ -16,6 +16,8 @@ namespace Practices.API.DAL.Entities
         public int Quantity { get; set; }
         public int BrandId { get; set; }
         public int DepartmentId { get; set; }
+        public string ProductImageUrl { get; set; }
+        public string ProductUrl { get; set; }
         public Brand Brand { get; set; }
         public Department Department { get; set; }
     }

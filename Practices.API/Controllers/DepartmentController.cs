@@ -106,12 +106,16 @@ namespace Practices.API.Controllers
 
         [Route("DeleteDepartment")]
         [HttpDelete]
-        public IActionResult DeleteDepartment(Department entity)
+        public IActionResult DeleteDepartment(int id)
         {
             try
             {
-                Repository.Delete(entity);
-                _unitOfWork.SaveChanges();
+                Department entity = Repository.GetById(id);
+                if (entity != null)
+                {
+                    Repository.Delete(entity);
+                    _unitOfWork.SaveChanges();
+                }
                 return Ok(entity);
             }
             catch (Exception ex)

@@ -89,23 +89,31 @@ namespace Practices.API.Migrations
                         .HasColumnName("IsActive");
 
                     b.Property<decimal>("ListPrice")
-                        .HasColumnType("decimal(18,2)")
+                        .HasColumnType("decimal(18,4)")
                         .HasColumnName("ListPrice");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ProductDescription");
 
+                    b.Property<string>("ProductImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ProductImageUrl");
+
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ProductName");
+
+                    b.Property<string>("ProductUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ProductUrl");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
                         .HasColumnName("Quantity");
 
                     b.Property<decimal>("SellingPrice")
-                        .HasColumnType("decimal(18,2)")
+                        .HasColumnType("decimal(18,4)")
                         .HasColumnName("SellingPrice");
 
                     b.HasKey("ProductId");

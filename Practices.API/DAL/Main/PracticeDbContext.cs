@@ -10,11 +10,13 @@ namespace Practices.API.DAL.Main
 {
     public class PracticeDbContext : DbContext
     {
+        public PracticeDbContext() : base()
+        {
+        }
         public PracticeDbContext(DbContextOptions<PracticeDbContext> options)
   : base(options)
         {
         }
-
 
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Department> Departments { get; set; }
@@ -27,7 +29,7 @@ namespace Practices.API.DAL.Main
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new BrandMap());
             modelBuilder.ApplyConfiguration(new DepartmentMap());

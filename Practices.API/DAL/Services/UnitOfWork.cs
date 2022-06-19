@@ -13,17 +13,23 @@ namespace Practices.API.DAL.Infrastructure
         public readonly PracticeDbContext _dbContext;
         public readonly IBrandRepository _brandRepository;
         public readonly IDepartmentRepository _departmentRepository;
+        public readonly ILineItemRepository _lineItemRepository;
         public readonly IProductRepository _productRepository;
+        public readonly IShoppingCartRepository _shoppingCartRepository;
 
         public UnitOfWork(PracticeDbContext dbContext,
             IBrandRepository brandRepository,
             IDepartmentRepository departmentRepository,
-            IProductRepository productRepository)
+            ILineItemRepository lineItemRepository,
+            IProductRepository productRepository,
+            IShoppingCartRepository shoppingCartRepository)
         {
             _dbContext = dbContext;
             _brandRepository = brandRepository;
             _departmentRepository = departmentRepository;
+            _lineItemRepository = lineItemRepository;
             _productRepository = productRepository;
+            _shoppingCartRepository = shoppingCartRepository;
         }
 
         public IBrandRepository BrandRepository
@@ -34,9 +40,20 @@ namespace Practices.API.DAL.Infrastructure
         {
             get { return _departmentRepository; }
         }
+
+        public ILineItemRepository LineItemRepository
+        {
+            get { return _lineItemRepository; }
+        }
+
         public IProductRepository ProductRepository
         {
             get { return _productRepository; }
+        }
+
+        public IShoppingCartRepository ShoppingCartRepository
+        {
+            get { return _shoppingCartRepository; }
         }
 
         public void SaveChanges()

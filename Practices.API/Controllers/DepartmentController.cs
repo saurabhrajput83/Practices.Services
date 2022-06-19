@@ -14,10 +14,10 @@ namespace Practices.API.Controllers
     public class DepartmentController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<DepartmentController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentController(ILogger<WeatherForecastController> logger,
+        public DepartmentController(ILogger<DepartmentController> logger,
             IUnitOfWork unitOfWork)
         {
             _logger = logger;
@@ -32,8 +32,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                IEnumerable<Department> brands = Repository.GetAll();
-                return Ok(brands);
+                IEnumerable<Department> items = Repository.GetAll();
+                return Ok(items);
             }
             catch (Exception ex)
             {
@@ -47,8 +47,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                IEnumerable<Department> brands = Repository.GetAllActiveDepartments();
-                return Ok(brands);
+                IEnumerable<Department> items = Repository.GetAllActiveDepartments();
+                return Ok(items);
             }
             catch (Exception ex)
             {
@@ -63,8 +63,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                Department brand = Repository.GetById(id);
-                return Ok(brand);
+                Department item = Repository.GetById(id);
+                return Ok(item);
             }
             catch (Exception ex)
             {

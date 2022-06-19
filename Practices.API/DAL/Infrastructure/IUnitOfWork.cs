@@ -10,7 +10,9 @@ namespace Practices.API.DAL.Infrastructure
     {
         IBrandRepository BrandRepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
+        ILineItemRepository LineItemRepository { get; }
         IProductRepository ProductRepository { get; }
+        IShoppingCartRepository ShoppingCartRepository { get; }
         void SaveChanges();
     }
 }

@@ -20,7 +20,10 @@ namespace Practices.API.DAL.Main
 
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<LineItem> LineItems { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

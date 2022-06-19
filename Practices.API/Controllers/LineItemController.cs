@@ -11,28 +11,28 @@ namespace Practices.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class LineItemController : ControllerBase
     {
 
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<LineItemController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(ILogger<ProductController> logger,
+        public LineItemController(ILogger<LineItemController> logger,
             IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
 
-        public IProductRepository Repository { get { return _unitOfWork.ProductRepository; } }
+        public ILineItemRepository Repository { get { return _unitOfWork.LineItemRepository; } }
 
-        [Route("GetAllProducts")]
+        [Route("GetAllLineItems")]
         [HttpGet]
-        public IActionResult GetAllProducts()
+        public IActionResult GetAllLineItems()
         {
             try
             {
-                IEnumerable<Product> items = Repository.GetAll();
+                IEnumerable<LineItem> items = Repository.GetAll();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -41,13 +41,13 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("GetAllActiveProducts")]
+        [Route("GetAllLineItemsByShoppingCartId")]
         [HttpGet]
-        public IActionResult GetAllActiveProducts()
+        public IActionResult GetAllLineItemsByShoppingCartId(int shoppingCartId)
         {
             try
             {
-                IEnumerable<Product> items = Repository.GetAllActiveProducts();
+                IEnumerable<LineItem> items = Repository.GetAllByShoppingCartId(shoppingCartId);
                 return Ok(items);
             }
             catch (Exception ex)
@@ -57,13 +57,13 @@ namespace Practices.API.Controllers
         }
 
 
-        [Route("GetProductById/{id?}")]
+        [Route("GetLineItemById/{id?}")]
         [HttpGet]
-        public IActionResult GetProductById(int id)
+        public IActionResult GetLineItemById(int id)
         {
             try
             {
-                Product item = Repository.GetById(id);
+                LineItem item = Repository.GetById(id);
                 return Ok(item);
             }
             catch (Exception ex)
@@ -72,9 +72,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("InsertProduct")]
+        [Route("InsertLineItem")]
         [HttpPost]
-        public IActionResult InsertProduct(Product entity)
+        public IActionResult InsertLineItem(LineItem entity)
         {
             try
             {
@@ -88,9 +88,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("UpdateProduct")]
+        [Route("UpdateLineItem")]
         [HttpPut]
-        public IActionResult UpdateProduct(Product entity)
+        public IActionResult UpdateLineItem(LineItem entity)
         {
             try
             {
@@ -104,13 +104,13 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("DeleteProduct")]
+        [Route("DeleteLineItem")]
         [HttpDelete]
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteLineItem(int id)
         {
             try
             {
-                Product entity = Repository.GetById(id);
+                LineItem entity = Repository.GetById(id);
                 if (entity != null)
                 {
                     Repository.Delete(entity);

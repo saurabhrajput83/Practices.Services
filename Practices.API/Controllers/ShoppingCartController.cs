@@ -11,28 +11,28 @@ namespace Practices.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ShoppingCartController : ControllerBase
     {
 
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<ShoppingCartController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(ILogger<ProductController> logger,
+        public ShoppingCartController(ILogger<ShoppingCartController> logger,
             IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
 
-        public IProductRepository Repository { get { return _unitOfWork.ProductRepository; } }
+        public IShoppingCartRepository Repository { get { return _unitOfWork.ShoppingCartRepository; } }
 
-        [Route("GetAllProducts")]
+        [Route("GetAllShoppingCarts")]
         [HttpGet]
-        public IActionResult GetAllProducts()
+        public IActionResult GetAllShoppingCarts()
         {
             try
             {
-                IEnumerable<Product> items = Repository.GetAll();
+                IEnumerable<ShoppingCart> items = Repository.GetAll();
                 return Ok(items);
             }
             catch (Exception ex)
@@ -41,29 +41,13 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("GetAllActiveProducts")]
+        [Route("GetShoppingCartById/{id?}")]
         [HttpGet]
-        public IActionResult GetAllActiveProducts()
+        public IActionResult GetShoppingCartById(int id)
         {
             try
             {
-                IEnumerable<Product> items = Repository.GetAllActiveProducts();
-                return Ok(items);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-
-        [Route("GetProductById/{id?}")]
-        [HttpGet]
-        public IActionResult GetProductById(int id)
-        {
-            try
-            {
-                Product item = Repository.GetById(id);
+                ShoppingCart item = Repository.GetById(id);
                 return Ok(item);
             }
             catch (Exception ex)
@@ -72,12 +56,13 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("InsertProduct")]
+        [Route("InsertShoppingCart")]
         [HttpPost]
-        public IActionResult InsertProduct(Product entity)
+        public IActionResult InsertShoppingCart(ShoppingCart entity)
         {
             try
             {
+                entity.CreatedDate = DateTime.Now;
                 Repository.Insert(entity);
                 _unitOfWork.SaveChanges();
                 return Ok(entity);
@@ -88,9 +73,9 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("UpdateProduct")]
+        [Route("UpdateShoppingCart")]
         [HttpPut]
-        public IActionResult UpdateProduct(Product entity)
+        public IActionResult UpdateShoppingCart(ShoppingCart entity)
         {
             try
             {
@@ -104,13 +89,13 @@ namespace Practices.API.Controllers
             }
         }
 
-        [Route("DeleteProduct")]
+        [Route("DeleteShoppingCart")]
         [HttpDelete]
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteShoppingCart(int id)
         {
             try
             {
-                Product entity = Repository.GetById(id);
+                ShoppingCart entity = Repository.GetById(id);
                 if (entity != null)
                 {
                     Repository.Delete(entity);

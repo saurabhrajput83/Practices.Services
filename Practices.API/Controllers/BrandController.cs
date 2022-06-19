@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Practices.API.DAL.Entities;
 using Practices.API.DAL.Infrastructure;
@@ -14,10 +15,10 @@ namespace Practices.API.Controllers
     public class BrandController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<BrandController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public BrandController(ILogger<WeatherForecastController> logger,
+        public BrandController(ILogger<BrandController> logger,
             IUnitOfWork unitOfWork)
         {
             _logger = logger;
@@ -32,9 +33,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                //string sessionId = this.HttpContext.Request.Form["SessionId"].ToString();
-                IEnumerable<Brand> brands = Repository.GetAll();
-                return Ok(brands);
+                IEnumerable<Brand> items = Repository.GetAll();
+                return Ok(items);
             }
             catch (Exception ex)
             {
@@ -48,8 +48,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                IEnumerable<Brand> brands = Repository.GetAllActiveBrands();
-                return Ok(brands);
+                IEnumerable<Brand> items = Repository.GetAllActiveBrands();
+                return Ok(items);
             }
             catch (Exception ex)
             {
@@ -64,8 +64,8 @@ namespace Practices.API.Controllers
         {
             try
             {
-                Brand brand = Repository.GetById(id);
-                return Ok(brand);
+                Brand item = Repository.GetById(id);
+                return Ok(item);
             }
             catch (Exception ex)
             {

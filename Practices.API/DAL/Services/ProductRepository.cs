@@ -1,4 +1,5 @@
-﻿using Practices.API.DAL.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Practices.API.DAL.Entities;
 using Practices.API.DAL.Main;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,16 @@ namespace Practices.API.DAL.Infrastructure
         public IEnumerable<Product> GetAll()
         {
             return _dbContext.Products
+                    .Include("Brand")
+                    .Include("Department")
                     .AsEnumerable();
         }
 
         public IEnumerable<Product> GetAllActiveProducts()
         {
             return _dbContext.Products
+                .Include("Brand")
+                .Include("Department")
                 .Where(x => x.IsActive == true)
                 .AsEnumerable();
         }
@@ -32,6 +37,8 @@ namespace Practices.API.DAL.Infrastructure
         public Product GetById(int id)
         {
             return _dbContext.Products
+                .Include("Brand")
+                .Include("Department")
                 .Where(x => x.ProductId == id)
                 .FirstOrDefault();
         }

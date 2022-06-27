@@ -32,7 +32,7 @@ namespace Practices.API
         public void ConfigureServices(IServiceCollection services
             )
         {
-            services.AddCors(options=>
+            services.AddCors(options =>
             {
                 options.AddPolicy(default_Cors_Policy, policy =>
                 {
@@ -58,7 +58,7 @@ namespace Practices.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Practices.API", Version = "v1" });
             });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,12 +71,16 @@ namespace Practices.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Practices.API v1"));
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+       
+            app.UseRouting();
             app.UseCors(default_Cors_Policy);
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

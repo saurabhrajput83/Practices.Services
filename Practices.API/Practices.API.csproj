@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="DAL\Migrations\" />
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

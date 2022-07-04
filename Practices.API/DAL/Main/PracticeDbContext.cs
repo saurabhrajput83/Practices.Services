@@ -37,6 +37,8 @@ namespace Practices.API.DAL.Main
             modelBuilder.ApplyConfiguration(new BrandMap());
             modelBuilder.ApplyConfiguration(new DepartmentMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new ShoppingCartMap());
+            modelBuilder.ApplyConfiguration(new LineItemMap());
         }
     }
 }

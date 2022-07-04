@@ -52,6 +52,13 @@ namespace Practices.API
             services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(options =>
+                {
+                     
+                });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

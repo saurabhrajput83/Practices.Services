@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Practices.API.DAL.Main;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,18 @@ namespace Practices.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                using (var practiceDbContext = serviceProvider.GetRequiredService<PracticeDbContext>())
+                {
+                    practiceDbContext.Database.Migrate();
+                    SeedDatabase(practiceDbContext);
+                }
+
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +36,10 @@ namespace Practices.API
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        public static void SeedDatabase(PracticeDbContext practiceDbContext)
+        { 
+            
+        }
     }
 }
